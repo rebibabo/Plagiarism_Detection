@@ -30,6 +30,8 @@ STOP_WORDS = set(stopwords.words('english')).union(set(string.punctuation))
 brown_words = [w.lower() for w in brown.words()]
 brown_freq = FreqDist(brown_words)
 nlp = spacy.load("en_core_web_sm")
+device = "mps" if torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu")
+model = None
 COMMON_WORDS = dict(brown_freq)
 MOST_COMMON_WORDS = dict(brown_freq.most_common(5000))
 LEAST_COMMON_WORDS = dict(brown_freq.most_common()[:-40001:-1])
@@ -521,7 +523,8 @@ def advanced_word_score(sentence):
 def compute_sentence_embeddings(
     sentences: List[str],
     batch_size: int = 32,
-    normalize: bool = False
+    normalize: bool = False,
+    model_name: str = "all-MiniLM-L6-v2"
 ) -> np.ndarray:
     """
     Compute sentence embeddings for a list of sentences.
@@ -530,13 +533,16 @@ def compute_sentence_embeddings(
         sentences: List of sentences
         batch_size: encoding batch size
         normalize: whether to L2 normalize embeddings
+        model_name: name of the sentence transformer model
 
     Returns:
         embeddings: np.ndarray, shape (L, dim)
     """
+    global model
 
-    device = "mps" if torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu")
-    model = SentenceTransformer("all-MiniLM-L6-v2", device=device)
+    if model is None:
+        model = SentenceTransformer(model_name, device=device)
+
     embeddings = model.encode(
         sentences,
         batch_size=batch_size,

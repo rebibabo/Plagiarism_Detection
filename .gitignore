@@ -1,10 +1,8 @@
-models
 pan-plagiarism-corpus-2011*
 detections*
 dataset*
 __pycache__
 .ipynb_checkpoints
-*.pth
 .cache
 test.txt
 train_SBERT.py
@@ -16,3 +14,4 @@ note.md
 paper
 *.pkl
 *.png
+.DS_Store

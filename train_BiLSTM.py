@@ -41,7 +41,6 @@ def load_documents(
           doc["labels"]:   (L,)
           doc["indexes"]:  (L, 2)
           doc["doc_id"]:   str
-          doc["sentences"]: List[str]
     """
 
     if use_keys is None:
@@ -83,8 +82,7 @@ def load_documents(
                 "features": X,
                 "labels": np.asarray(doc["labels"], dtype=np.float32),
                 "indexes": np.asarray(doc["sentence_offsets"], dtype=np.int64),
-                "doc_id": doc["document"],
-                "sentences": doc["sentences"]
+                "doc_id": doc["document"]
             })
 
     return docs

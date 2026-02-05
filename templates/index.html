@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagiarism Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Plagiarism Detection System</h1>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Panel: Input -->
+            <div class="left-panel">
+                <div class="input-section">
+                    <h2>Input Text</h2>
+                    <textarea 
+                        id="inputText" 
+                        class="input-textarea" 
+                        placeholder="Please enter the text to be detected..."
+                    ></textarea>
+                    
+                    <div class="control-section">
+                        <button id="detectBtn" class="detect-btn">
+                            <span class="btn-text">Detect Plagiarism</span>
+                            <span class="loading-spinner" style="display: none;"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Results -->
+            <div class="right-panel">
+                <div class="result-section">
+                    <h2>Detection Results</h2>
+                    <div id="statsInfo" class="stats-info" style="display: none;">
+                        <p>Sentences Detected: <span id="sentenceCount">0</span></p>
+                    </div>
+                    
+                    <div id="resultsContainer" class="results-container">
+                        <p class="placeholder">Detection results will be displayed here...</p>
+                    </div>
+                </div>
+                
+                <!-- Severity Label at Bottom -->
+                <div class="severity-label">
+                    <div class="label-item">
+                        <span class="label-text">No Result</span>
+                        <span class="label-prob">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <h3>Severity Levels</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="color-box" style="background-color: rgba(76, 175, 80, 0.4);"></div>
+                    <span>Low Probability (0 - 0.5)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box" style="background-color: rgba(129, 199, 132, 0.4);"></div>
+                    <span>Low Suspicious (0.5 - 0.6)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box" style="background-color: rgba(255, 193, 7, 0.3);"></div>
+                    <span>Low-Mid Suspicious (0.6 - 0.7)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box" style="background-color: rgba(255, 152, 0, 0.4);"></div>
+                    <span>Mid Suspicious (0.7 - 0.8)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box" style="background-color: rgba(255, 87, 34, 0.4);"></div>
+                    <span>Mid-High Suspicious (0.8 - 0.9)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box" style="background-color: rgba(244, 67, 54, 0.5);"></div>
+                    <span>High Suspicious (0.9 - 1.0)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

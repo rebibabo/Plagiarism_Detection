@@ -138,6 +138,8 @@ def add_embeddings_to_dataset(dataset, batch_size=256):
     for doc, n in zip(dataset, sent_counts):
         doc["features"]["embedding"] = all_embeddings[offset: offset + n]
         offset += n
+        # 删除 sentences，节省空间
+        del doc["sentences"]
 
 
 def process_document(txt_path, xml_path):

@@ -2,3 +2,4 @@ sentence-transformers
 textstat
 spacy
 lexical_diversity
+flask
