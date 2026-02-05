@@ -15,4 +15,4 @@ paper
 *.pkl
 *.png
 .DS_Store
-external_detection
+external_detection.py
